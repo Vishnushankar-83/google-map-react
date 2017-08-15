@@ -295,21 +295,14 @@ export default class GoogleMapMarkers extends Component {
           y: pt.y + dy,
           ...latLng,
         };
-
+        const { lat, lng, ...childProps } = child.props;
         return (
           <div
             key={childKey}
             style={{ ...style, ...stylePtPos }}
             className={child.props.$markerHolderClassName}
           >
-            {React.cloneElement(child, {
-              $hover: childKey === this.state.hoverKey,
-              $getDimensions: this._getDimensions,
-              $dimensionKey: childKey,
-              $geoService: this.props.geoService,
-              $onMouseAllow: this._onMouseAllow,
-              $prerender: this.props.prerender,
-            })}
+            {React.createElement(child.type, childProps)}
           </div>
         );
       }
